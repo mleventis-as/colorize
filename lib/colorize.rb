@@ -81,8 +81,10 @@ class String
       elsif (params.instance_of?(Symbol))
         match[1] = COLORS[params] + COLOR_OFFSET if params && COLORS[params]
       end
-
-      str << "\033[#{match[0]};#{match[1]};#{match[2]}m#{match[3]}\033[0m"
+      
+      (match[2] == BACKGROUND_OFFSET + COLORS[:default]) ?
+          str << "\033[#{match[0]};#{match[1]}m#{match[3]}\033[0m"
+          str << "\033[#{match[0]};#{match[1]};#{match[2]}m#{match[3]}\033[0m"
     end
   end
 
